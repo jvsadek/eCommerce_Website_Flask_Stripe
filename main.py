@@ -18,10 +18,8 @@ import stripe
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'FLASK_KEY'
-app.config['STRIPE_PUBLIC_KEY'] = 'pk_test_51OrdrlBgs1PQjD6ydbdvdnSK38DGse27OdON9pRI74lV5qeBq4kRxWuzSbWdrBtH9VOwofupOd3PNyU95oZidsr400bEYVZbm7'
-app.config['STRIPE_SECRET_KEY'] = 'sk_test_51OrdrlBgs1PQjD6yWn5yi4bdVldt5DgOfeMpTueFVnZONTJxYjNpTxHbAGfuUoarzSWG0uTXUDsr4heQDKBNYSGI00ntlsv1xg'
-# app.config['STRIPE_PUBLIC_KEY'] = 'YOUR_STRIPE_PUBLIC_KEY'
-# app.config['STRIPE_SECRET_KEY'] = 'YOUR_STRIPE_SECRET_KEY'
+app.config['STRIPE_PUBLIC_KEY'] = 'YOUR_STRIPE_PUBLIC_KEY'
+app.config['STRIPE_SECRET_KEY'] = 'YOUR_STRIPE_SECRET_KEY'
 stripe.api_key = app.config['STRIPE_SECRET_KEY']
 
 # app.config['SECRET_KEY']=  os.environ.get('FLASK_KEY')
@@ -36,16 +34,13 @@ def load_user(user_id):
     return db.get_or_404(User, user_id)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-# CONNECT TO DB
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URI", "sqlite:///cafes.db")
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///store.db'
 
 app.config['SQLALCHEMY_DATABASE_URI'] =\
         'sqlite:///' + os.path.join(basedir, './instance/store.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
-# db.init_app(app)
+
 
 class Transcation(db.Model):
     __tablename__ = "transcations"
